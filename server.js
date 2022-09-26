@@ -1,121 +1,32 @@
-const express=require('express');
+const express = require('express');
 const path = require('path');
-const ly=require('express-ejs-layouts');
-const ejsMate=require('ejs-mate');
-const mongoose=require('mongoose');
-const { use } = require('express/lib/application');
+const ejsMate = require('ejs-mate');
+const ejs = require('ejs');
+const client=require('twilio')('ACe0889217646ab6a6cb001fafdeff3b2a','e8b908228f0ed3e920e7df8598fb93de')
 
-const Category=require('./models/category');
-const recipe=require('./models/re');
-const feedback=require('./models/feedback');
-
-const app= express();
-
-
-app.use(express.urlencoded({extended:true}));
-
+const app = express();
 
 app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
+app.use(express.json())
+app.use(express.urlencoded({extended:false}))
 
-const RecipeRoutes=require('./routes/recipe');
-mongoose.connect(process.env.DB_URL||'mongodb://127.0.0.1:27017/Recipe', {
-    useNewUrlParser: true,
-   
-    useUnifiedTopology: true
-    
-});
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-    console.log("Database connected");
-});
-
-// recipe.insertMany([
-//     { 
-//                 "name": "Recipe Name Goes Here",
-//                 "description": `Recipe Description Goes Here`,
-//                 "email": "recipeemail@raddy.co.uk",
-//                 "ingredients": [
-//                   " level teaspoon baking powder",
-//                   " level teaspoon cayenne pepper",
-//                   "level teaspoon hot smoked paprika",
-//                 ],
-//                 "category": "Thai", 
-//                 "image": "southern-friend-chicken.jpg"
-//               },
-//               { 
-//                         "name": "Recipe Name Goes Here",
-//                         "description": `Recipe Description Goes Here`,
-//                         "email": "recipeemail@raddy.co.uk",
-//                         "ingredients": [
-//                           " level teaspoon baking powder",
-//                           " level teaspoon cayenne pepper",
-//                           " level teaspoon hot smoked paprika",
-//                         ],
-//                         "category": "Thai", 
-//                         "image": "southern-friend-chicken.jpg"
-//                       },
-//                 { 
-//                             "name": "Recipe Name Goes Here",
-//                             "description": `Recipe Description Goes Here`,
-//                             "email": "recipeemail@raddy.co.uk",
-//                             "ingredients": [
-//                               " level teaspoon baking powder",
-//                               " level teaspoon cayenne pepper",
-//                               " level teaspoon hot smoked paprika",
-//                             ],
-//                             "category": "Thai", 
-//                             "image": "southern-friend-chicken.jpg"
-//                           },
-                          
-//                           { 
-//                             "name": "Recipe Name Goes Here",
-//                             "description": `Recipe Description Goes Here`,
-//                             "email": "recipeemail@raddy.co.uk",
-//                             "ingredients": [
-//                               " level teaspoon baking powder",
-//                               " level teaspoon cayenne pepper",
-//                               "level teaspoon hot smoked paprika",
-//                             ],
-//                             "category": "Thai", 
-//                             "image": "southern-friend-chicken.jpg"
-//                           }
-                     
-                        
-// ]).then(function(){
-//         console.log('Inserted');
-//     }).catch(function(){
-//         console.log(error)
-//     });
-// Category.insertMany([
-//     {
-//         "name":"Thai",
-//         "image":"thai-food.jpg"
-//     },
-//     {
-//         "name":"Indian",
-//         "image":"indian-food.jpg"
-//     },
-//     {
-//         "name":"Mexican",
-//         "image":"mexican-food.jpg"
-//     },
-//     {
-//         "name":"Spanish",
-//         "image":"spanish-food.jpg"
-//     }
-
-// ]).then(function(){
-//     console.log('Inserted');
-// }).catch(function(){
-//     console.log(error)
-// });
 app.use(express.static(__dirname + "/public"));
-app.use('/',RecipeRoutes);
-let port=process.env.PORT||8080
-app.listen(port,()=>{
-    console.log('Listening');
+app.get('/',(req,res)=>{
+   
+
+    res.render('main');
 })
+app.get('/weather',(req,res)=>{
+    res.render('weather');
+})
+app.get('/maps',(req,res)=>{
+    res.render('maps');
+})
+const port= process.env.PORT||3000
+app.listen(port, () => {
+    console.log('Serving on port 3000')
+})
+
