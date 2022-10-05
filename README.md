@@ -1,4 +1,4 @@
-# FreYSummerHack-New
+# FreYSummer-New
 # About
 It is a project about going on a journey during the summers which tells us the weather of that place and along with that also tells us the distance from our native place by fetching the data using API such as irt uses openWeather API along with google Maps API for calculating the distance between two places.
 We are using EJS as the templating engine to display them on the webpage 
@@ -55,7 +55,7 @@ Used Heroku for deployment by directing linking the repo using GitHub
 # SnapShots of the Website:
 ![w1](https://user-images.githubusercontent.com/89990691/175777851-9a693d34-df41-4fd6-af51-d9f9a3b39799.png)
 ![w2](https://user-images.githubusercontent.com/89990691/175777856-819a675f-0346-4295-a346-011715fd53ba.png)
-![w3](https://user-images.githubusercontent.com/89990691/175777865-8a1d5c38-c467-46da-ac81-1c1e58e10ebb.png)
+
 
 ![w4](https://user-images.githubusercontent.com/89990691/175777879-a81e8535-1b49-4084-b593-7ec87319f15a.png)
 
